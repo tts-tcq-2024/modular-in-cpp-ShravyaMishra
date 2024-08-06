@@ -1,33 +1,29 @@
-// ColorCoder.h
+// TelCoColorCoder.h
 
-#ifndef COLORCODER_H
-#define COLORCODER_H
+#ifndef TELCOCOLORCODER_H
+#define TELCOCOLORCODER_H
 
 #include <string>
 
 namespace TelCoColorCoder 
 {
-    enum MajorColor { WHITE, RED, BLACK, YELLOW, VIOLET };
-    enum MinorColor { BLUE, ORANGE, GREEN, BROWN, SLATE };
+    enum Color { WHITE, RED, BLACK, YELLOW, VIOLET, BLUE, ORANGE, GREEN, BROWN, SLATE };
 
-    extern const char* MajorColorNames[];
-    extern const char* MinorColorNames[];
-    extern int numberOfMajorColors;
-    extern int numberOfMinorColors;
+    extern const char* ColorNames[];
+    extern int numberOfColors;
 
     class ColorPair {
     private:
-        MajorColor majorColor;
-        MinorColor minorColor;
+        Color color;
     public:
-        ColorPair(MajorColor major, MinorColor minor);
-        MajorColor getMajor();
-        MinorColor getMinor();
+        ColorPair(Color color);
+        Color getColor();
         std::string ToString();
     };
 
     ColorPair GetColorFromPairNumber(int pairNumber);
-    int GetPairNumberFromColor(MajorColor major, MinorColor minor);
+    int GetPairNumberFromColor(Color color);
+    void printColorCodingReference();
 }
 
-#endif // COLORCODER_H
+#endif // TELCOCOLORCODER_H
