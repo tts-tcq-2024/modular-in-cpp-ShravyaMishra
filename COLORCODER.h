@@ -6,7 +6,7 @@
 #include <string>
 #include <stdexcept>
 
-namespace COLORCODER 
+namespace TelCoColorCoder 
 {
     enum MajorColor { WHITE, RED, BLACK, YELLOW, VIOLET };
     enum MinorColor { BLUE, ORANGE, GREEN, BROWN, SLATE };
@@ -37,4 +37,4 @@ namespace COLORCODER
     ColorPair findColorPairFromDescription(const std::string& description);
 }
 
-#endif // COLORCODER_H
+#endif // TELCOCOLORCODER_H
