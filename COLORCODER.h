@@ -10,6 +10,7 @@ namespace TelCoColorCoder
     enum Color { WHITE, RED, BLACK, YELLOW, VIOLET, BLUE, ORANGE, GREEN, BROWN, SLATE };
 
     extern const char* ColorNames[];
+    extern const char* ColorDescriptions[];
     extern int numberOfColors;
 
     class ColorPair {
@@ -24,6 +25,9 @@ namespace TelCoColorCoder
     ColorPair GetColorFromPairNumber(int pairNumber);
     int GetPairNumberFromColor(Color color);
     void printColorCodingReference();
+    void printColorDescriptions();
+    void testNumberToPair(int pairNumber, Color expectedColor);
+    void testPairToNumber(Color color, int expectedPairNumber);
 }
 
 #endif // TELCOCOLORCODER_H
