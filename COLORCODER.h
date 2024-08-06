@@ -1,7 +1,7 @@
 // TelCoColorCoder.h
 
-#ifndef TELCOCOLORCODER_H
-#define TELCOCOLORCODER_H
+#ifndef COLORCODER_H
+#define COLORCODER_H
 
 #include <string>
 #include <stdexcept>
@@ -37,4 +37,4 @@ namespace TelCoColorCoder
     ColorPair findColorPairFromDescription(const std::string& description);
 }
 
-#endif // TELCOCOLORCODER_H
+#endif // COLORCODER_H
