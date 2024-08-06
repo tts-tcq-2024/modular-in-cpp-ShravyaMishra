@@ -1,4 +1,4 @@
-// TelCoColorCoder.h
+// COLORCODER.h
 
 #ifndef COLORCODER_H
 #define COLORCODER_H
@@ -6,7 +6,7 @@
 #include <string>
 #include <stdexcept>
 
-namespace TelCoColorCoder 
+namespace COLORCODER 
 {
     enum MajorColor { WHITE, RED, BLACK, YELLOW, VIOLET };
     enum MinorColor { BLUE, ORANGE, GREEN, BROWN, SLATE };
