@@ -3,6 +3,8 @@
 #include "TelCoColorCoder.h"
 #include <iostream>
 #include <cassert>
+#include <sstream>
+#include <stdexcept>
 
 namespace TelCoColorCoder 
 {
@@ -90,5 +92,18 @@ namespace TelCoColorCoder
 
     bool isValidColorPair(MajorColor major, MinorColor minor) {
         return major >= 0 && major < numberOfMajorColors && minor >= 0 && minor < numberOfMinorColors;
+    }
+
+    ColorPair findColorPairFromDescription(const std::string& description) {
+        for (int i = 0; i < numberOfMajorColors; ++i) {
+            if (description.find(MajorColorNames[i]) != std::string::npos) {
+                for (int j = 0; j < numberOfMinorColors; ++j) {
+                    if (description.find(MinorColorNames[j]) != std::string::npos) {
+                        return ColorPair(static_cast<MajorColor>(i), static_cast<MinorColor>(j));
+                    }
+                }
+            }
+        }
+        throw std::invalid_argument("Description does not match any color pair.");
     }
 }
