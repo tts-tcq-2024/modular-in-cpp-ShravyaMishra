@@ -6,11 +6,8 @@
 
 namespace TelCoColorCoder 
 {
-    const char* ColorNames[] = {
-        "White", "Red", "Black", "Yellow", "Violet",
-        "Blue", "Orange", "Green", "Brown", "Slate"
-    };
-
+    const char* MajorColorNames[] = { "White", "Red", "Black", "Yellow", "Violet" };
+    const char* MinorColorNames[] = { "Blue", "Orange", "Green", "Brown", "Slate" };
     const char* ColorDescriptions[] = {
         "A neutral color, often associated with purity.",
         "A warm color, often associated with passion.",
@@ -24,57 +21,74 @@ namespace TelCoColorCoder
         "A dark color, often associated with stones."
     };
 
-    int numberOfColors = sizeof(ColorNames) / sizeof(ColorNames[0]);
+    const int numberOfMajorColors = sizeof(MajorColorNames) / sizeof(MajorColorNames[0]);
+    const int numberOfMinorColors = sizeof(MinorColorNames) / sizeof(MinorColorNames[0]);
 
-    ColorPair::ColorPair(Color color)
-        : color(color) {}
+    ColorPair::ColorPair(MajorColor major, MinorColor minor)
+        : majorColor(major), minorColor(minor) {}
 
-    Color ColorPair::getColor() {
-        return color;
+    MajorColor ColorPair::getMajor() const {
+        return majorColor;
     }
 
-    std::string ColorPair::ToString() {
-        return ColorNames[color];
+    MinorColor ColorPair::getMinor() const {
+        return minorColor;
+    }
+
+    std::string ColorPair::ToString() const {
+        return std::string(MajorColorNames[majorColor]) + " " + MinorColorNames[minorColor];
     }
 
     ColorPair GetColorFromPairNumber(int pairNumber) {
-        int zeroBasedPairNumber = pairNumber - 1;
-        if (zeroBasedPairNumber >= 0 && zeroBasedPairNumber < numberOfColors) {
-            return ColorPair((Color)zeroBasedPairNumber);
+        if (pairNumber < 1 || pairNumber > numberOfMajorColors * numberOfMinorColors) {
+            throw std::out_of_range("Pair number out of range");
         }
-        throw std::out_of_range("Invalid pair number");
+        int zeroBasedPairNumber = pairNumber - 1;
+        MajorColor majorColor = static_cast<MajorColor>(zeroBasedPairNumber / numberOfMinorColors);
+        MinorColor minorColor = static_cast<MinorColor>(zeroBasedPairNumber % numberOfMinorColors);
+        return ColorPair(majorColor, minorColor);
     }
 
-    int GetPairNumberFromColor(Color color) {
-        if (color >= 0 && color < numberOfColors) {
-            return color + 1;
+    int GetPairNumberFromColor(MajorColor major, MinorColor minor) {
+        if (major < 0 || major >= numberOfMajorColors || minor < 0 || minor >= numberOfMinorColors) {
+            throw std::out_of_range("Invalid color");
         }
-        throw std::out_of_range("Invalid color");
+        return major * numberOfMinorColors + minor + 1;
     }
 
     void printColorCodingReference() {
         std::cout << "Color Coding Reference Table:\n";
-        for (int i = 0; i < numberOfColors; ++i) {
-            std::cout << GetPairNumberFromColor((Color)i) << ": " << ColorNames[i] << "\n";
+        for (int i = 0; i < numberOfMajorColors; ++i) {
+            for (int j = 0; j < numberOfMinorColors; ++j) {
+                ColorPair colorPair(static_cast<MajorColor>(i), static_cast<MinorColor>(j));
+                std::cout << GetPairNumberFromColor(colorPair.getMajor(), colorPair.getMinor()) 
+                          << ": " << colorPair.ToString() << "\n";
+            }
         }
     }
 
     void printColorDescriptions() {
         std::cout << "Color Descriptions:\n";
-        for (int i = 0; i < numberOfColors; ++i) {
-            std::cout << ColorNames[i] << ": " << ColorDescriptions[i] << "\n";
+        for (int i = 0; i < numberOfMajorColors; ++i) {
+            std::cout << MajorColorNames[i] << ": " << ColorDescriptions[i] << "\n";
+        }
+        for (int i = 0; i < numberOfMinorColors; ++i) {
+            std::cout << MinorColorNames[i] << ": " << ColorDescriptions[numberOfMajorColors + i] << "\n";
         }
     }
 
-    void testNumberToPair(int pairNumber, Color expectedColor) {
-        ColorPair colorPair = GetColorFromPairNumber(pairNumber);
-        std::cout << "Got pair " << colorPair.ToString() << std::endl;
-        assert(colorPair.getColor() == expectedColor);
+    void printAllColorPairs() {
+        std::cout << "All Color Pairs:\n";
+        for (int i = 0; i < numberOfMajorColors; ++i) {
+            for (int j = 0; j < numberOfMinorColors; ++j) {
+                ColorPair colorPair(static_cast<MajorColor>(i), static_cast<MinorColor>(j));
+                std::cout << GetPairNumberFromColor(colorPair.getMajor(), colorPair.getMinor()) 
+                          << ": " << colorPair.ToString() << "\n";
+            }
+        }
     }
 
-    void testPairToNumber(Color color, int expectedPairNumber) {
-        int pairNumber = GetPairNumberFromColor(color);
-        std::cout << "Got pair number " << pairNumber << std::endl;
-        assert(pairNumber == expectedPairNumber);
+    bool isValidColorPair(MajorColor major, MinorColor minor) {
+        return major >= 0 && major < numberOfMajorColors && minor >= 0 && minor < numberOfMinorColors;
     }
 }
