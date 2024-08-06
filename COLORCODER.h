@@ -5,7 +5,6 @@
 
 #include <string>
 #include <stdexcept>
-#include <vector>
 
 namespace TelCoColorCoder 
 {
@@ -35,6 +34,7 @@ namespace TelCoColorCoder
     void printColorDescriptions();
     void printAllColorPairs();
     bool isValidColorPair(MajorColor major, MinorColor minor);
+    ColorPair findColorPairFromDescription(const std::string& description);
 }
 
 #endif // TELCOCOLORCODER_H
