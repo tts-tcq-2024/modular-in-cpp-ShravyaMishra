@@ -1,6 +1,6 @@
-// TelCoColorCoder.cpp
+// ColorCoder.cpp
 
-#include "TelCoColorCoder.h"
+#include "ColorCoder.h"
 #include <iostream>
 #include <cassert>
 #include <sstream>
