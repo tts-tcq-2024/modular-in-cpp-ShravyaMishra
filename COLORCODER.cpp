@@ -1,4 +1,4 @@
-// TelCoColorCoder.cpp
+// COLORCODE.cpp
 
 #include "COLORCODE.h"
 #include <iostream>
