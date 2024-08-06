@@ -40,5 +40,9 @@ int main() {
               << (TelCoColorCoder::isValidColorPair(TelCoColorCoder::RED, TelCoColorCoder::BLUE) ? "Yes" : "No") 
               << std::endl;
 
-    return 0;
-}
+    // Find a color pair from description
+    try {
+        TelCoColorCoder::ColorPair pair = TelCoColorCoder::findColorPairFromDescription("Red Blue");
+        std::cout << "Found color pair: " << pair.ToString() << std::endl;
+    } catch (const std::invalid_argument& e) {
+       
