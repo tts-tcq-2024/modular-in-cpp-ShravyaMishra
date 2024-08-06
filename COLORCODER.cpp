@@ -1,12 +1,12 @@
 // ColorCoder.cpp
 
-#include "ColorCoder.h"
+#include "COLORCODER.h"
 #include <iostream>
 #include <cassert>
 #include <sstream>
 #include <stdexcept>
 
-namespace TelCoColorCoder 
+namespace COLORCODER 
 {
     const char* MajorColorNames[] = { "White", "Red", "Black", "Yellow", "Violet" };
     const char* MinorColorNames[] = { "Blue", "Orange", "Green", "Brown", "Slate" };
